@@ -1,0 +1,15 @@
+{
+  "short_name": "SportyQo",
+  "name": "SportyQo — Every athlete deserves to be remembered.",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/fzct1jjG/283732.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0A0A0C",
+  "background_color": "#0A0A0C"
+}

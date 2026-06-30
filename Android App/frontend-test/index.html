@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SportyQo Backend Feature Tester</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-label="Backend tester controls">
+        <div>
+          <p class="eyebrow">SportyQo API Simulator</p>
+          <h1>Backend Feature Tester</h1>
+        </div>
+        <div class="controls">
+          <label>
+            API base URL
+            <input id="backendUrl" value="" placeholder="same-origin proxy" spellcheck="false" />
+          </label>
+          <button id="runAll" type="button">Run checks</button>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="Test summary">
+        <article class="metric">
+          <span id="passedCount">0</span>
+          <p>Passed</p>
+        </article>
+        <article class="metric">
+          <span id="failedCount">0</span>
+          <p>Failed</p>
+        </article>
+        <article class="metric">
+          <span id="warningCount">0</span>
+          <p>Warnings</p>
+        </article>
+        <article class="metric wide">
+          <span id="lastRun">Not run yet</span>
+          <p>Last run</p>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <nav class="tabs" aria-label="Feature views">
+          <button class="tab active" data-tab="overview" type="button">Overview</button>
+          <button class="tab" data-tab="home" type="button">Home</button>
+          <button class="tab" data-tab="league" type="button">League</button>
+          <button class="tab" data-tab="performance" type="button">Performance</button>
+          <button class="tab" data-tab="dugout" type="button">Dugout</button>
+          <button class="tab" data-tab="playbook" type="button">Playbook</button>
+          <button class="tab" data-tab="profile" type="button">Profile</button>
+        </nav>
+
+        <section class="panel active" id="overview">
+          <div class="section-title">
+            <h2>README Feature Coverage</h2>
+            <p>Runs requests against documented backend features and validates response shape.</p>
+          </div>
+          <div id="testList" class="test-list"></div>
+        </section>
+
+        <section class="panel" id="home">
+          <div class="screen-header">
+            <h2>Home</h2>
+            <span id="homeStatus" class="status neutral">Waiting</span>
+          </div>
+          <div class="phone-screen">
+            <div class="hero-row">
+              <div>
+                <p class="muted">Athlete</p>
+                <h3 id="homeName">Aarav Mehta</h3>
+              </div>
+              <span id="homeTier" class="tier">green</span>
+            </div>
+            <div class="score-block">
+              <span id="homeScore">758</span>
+              <p id="homeDelta">+35 this month</p>
+            </div>
+            <div class="info-row">
+              <p>Active League</p>
+              <strong id="homeLeague">Falcons FC Youth League</strong>
+            </div>
+            <div class="info-row">
+              <p>Next Match</p>
+              <strong id="homeMatch">Alpha Warriors vs Thunder Strikers</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="league">
+          <div class="screen-header">
+            <h2>Join League</h2>
+            <span id="leagueStatus" class="status neutral">Waiting</span>
+          </div>
+          <div class="flow">
+            <label>
+              Join code
+              <input id="joinCode" value="482193" maxlength="6" />
+            </label>
+            <button id="runLeague" type="button">Test league flow</button>
+          </div>
+          <div id="leagueOutput" class="output-box">Validate code, list teams, and join a team.</div>
+        </section>
+
+        <section class="panel" id="performance">
+          <div class="screen-header">
+            <h2>Performance</h2>
+            <span id="scoreStatus" class="status neutral">Waiting</span>
+          </div>
+          <div class="performance-layout">
+            <div class="score-block compact">
+              <span id="perfScore">758</span>
+              <p id="perfProgress">242 points to yellow</p>
+            </div>
+            <div id="journeyChart" class="chart" aria-label="Qo score journey"></div>
+            <div class="info-row">
+              <p>Ranking</p>
+              <strong id="rankingText">#14 / 280, Top 5%</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="dugout">
+          <div class="screen-header">
+            <h2>Dugout</h2>
+            <span id="dugoutStatus" class="status neutral">Waiting</span>
+          </div>
+          <div class="flow">
+            <input id="dugoutQuery" value="Aarav" aria-label="Dugout search" />
+            <button id="runDugout" type="button">Search</button>
+          </div>
+          <div id="dugoutList" class="player-list"></div>
+        </section>
+
+        <section class="panel" id="playbook">
+          <div class="screen-header">
+            <h2>Playbook</h2>
+            <span id="mediaStatus" class="status neutral">Waiting</span>
+          </div>
+          <div class="flow">
+            <select id="mediaTab" aria-label="Media tab">
+              <option value="playing">Playing</option>
+              <option value="certificates">Certificates</option>
+              <option value="team">Team</option>
+              <option value="trophies">Trophies</option>
+            </select>
+            <button id="runMedia" type="button">Test media</button>
+          </div>
+          <div id="mediaList" class="media-grid"></div>
+        </section>
+
+        <section class="panel" id="profile">
+          <div class="screen-header">
+            <h2>Profile</h2>
+            <span id="profileStatus" class="status neutral">Waiting</span>
+          </div>
+          <div class="profile-card">
+            <h3 id="profileName">Aarav Mehta</h3>
+            <p id="profileBio">Explosive forward with strong off-ball movement and consistent finishing.</p>
+            <div id="profileMeta" class="chip-row"></div>
+            <div id="profileRecommendations" class="recommendations"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
